@@ -18,19 +18,6 @@ class User < ActiveRecord::Base
   uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
-  has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" },
-    :default_url => "/images/:style/missing.png"
-    has_attached_file :avatar, :styles => { :medium => "300x300>", :thumb => "100x100#" },
-      :default_url => "/images/:style/missing.png",
-      :url  => ":s3_domain_url",
-      :path => "public/avatars/:id/:style_:basename.:extension",
-      :storage => :fog,
-      :fog_credentials => {
-          provider: 'AWS',
-          aws_access_key_id: "AKIAIRPKLJNSDO23425",
-          aws_secret_access_key: "9LXV/GWagu/CJ4DoMLKSmdasdaZeUyuax/Ei92hL7"
-      },
-      fog_directory: "rails-demo-env"  
 
   class << self
     # Returns the hash digest of the given string.
